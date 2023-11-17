@@ -23,12 +23,13 @@ namespace Qa6185.MyEntities
             string? filterText = null,
             string? name = null,
             string? property2 = null,
+            Guid? id = null,
             string? sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0,
             CancellationToken cancellationToken = default)
         {
-            var query = ApplyFilter((await GetQueryableAsync()), filterText, name, property2);
+            var query = ApplyFilter((await GetQueryableAsync()), filterText, name, property2, id);
             query = query.OrderBy(string.IsNullOrWhiteSpace(sorting) ? MyEntityConsts.GetDefaultSorting(false) : sorting);
             return await query.PageBy(skipCount, maxResultCount).ToListAsync(cancellationToken);
         }
@@ -37,6 +38,7 @@ namespace Qa6185.MyEntities
             string? filterText = null,
             string? name = null,
             string? property2 = null,
+            Guid? id = null,
             CancellationToken cancellationToken = default)
         {
             var query = ApplyFilter((await GetDbSetAsync()), filterText, name, property2);
@@ -47,12 +49,14 @@ namespace Qa6185.MyEntities
             IQueryable<MyEntity> query,
             string? filterText = null,
             string? name = null,
-            string? property2 = null)
+            string? property2 = null,
+            Guid? id = null)
         {
             return query
                     .WhereIf(!string.IsNullOrWhiteSpace(filterText), e => e.Name!.Contains(filterText!) || e.Property2!.Contains(filterText!))
                     .WhereIf(!string.IsNullOrWhiteSpace(name), e => e.Name.Contains(name))
-                    .WhereIf(!string.IsNullOrWhiteSpace(property2), e => e.Property2.Contains(property2));
+                    .WhereIf(!string.IsNullOrWhiteSpace(property2), e => e.Property2.Contains(property2))
+                    .WhereIf(id.HasValue, e => e.Id == id);
         }
     }
 }

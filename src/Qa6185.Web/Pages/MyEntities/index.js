@@ -15,9 +15,19 @@ $(function () {
         scriptUrl: abp.appPath + "Pages/MyEntities/editModal.js",
         modalClass: "myEntityEdit"
     });
+    
+    var $id = $("#Id");
+    if($id.length){
+        var id = $id.val();
+        editModal.open({ id: id });
+    }
 
+    var firstTime = true;
 	var getFilter = function() {
+        var id = firstTime ? $("#Id").val() : null;
+        firstTime = false;
         return {
+            id: id,
             filterText: $("#FilterText").val(),
             name: $("#NameFilter").val(),
 			property2: $("#Property2Filter").val()
@@ -63,6 +73,12 @@ $(function () {
                                             abp.notify.info(l("SuccessfullyDeleted"));
                                             dataTable.ajax.reloadEx();;
                                         });
+                                }
+                            },
+                            {
+                                text: l("New Page"),
+                                action: function (data) {
+                                    window.open(abp.appPath + "MyEntities?id=" + data.record.id);
                                 }
                             }
                         ]

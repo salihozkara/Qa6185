@@ -37,8 +37,8 @@ namespace Qa6185.MyEntities
 
         public virtual async Task<PagedResultDto<MyEntityDto>> GetListAsync(GetMyEntitiesInput input)
         {
-            var totalCount = await _myEntityRepository.GetCountAsync(input.FilterText, input.Name, input.Property2);
-            var items = await _myEntityRepository.GetListAsync(input.FilterText, input.Name, input.Property2, input.Sorting, input.MaxResultCount, input.SkipCount);
+            var totalCount = await _myEntityRepository.GetCountAsync(input.FilterText, input.Name, input.Property2, input.Id);
+            var items = await _myEntityRepository.GetListAsync(input.FilterText, input.Name, input.Property2, input.Id, input.Sorting, input.MaxResultCount, input.SkipCount);
 
             return new PagedResultDto<MyEntityDto>
             {

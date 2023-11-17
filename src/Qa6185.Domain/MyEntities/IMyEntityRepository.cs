@@ -12,6 +12,7 @@ namespace Qa6185.MyEntities
             string? filterText = null,
             string? name = null,
             string? property2 = null,
+            Guid? id = null,
             string? sorting = null,
             int maxResultCount = int.MaxValue,
             int skipCount = 0,
@@ -22,6 +23,7 @@ namespace Qa6185.MyEntities
             string? filterText = null,
             string? name = null,
             string? property2 = null,
+            Guid? id = null,
             CancellationToken cancellationToken = default);
     }
 }

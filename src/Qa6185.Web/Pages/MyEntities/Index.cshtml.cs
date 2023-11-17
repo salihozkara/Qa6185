@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.Application.Dtos;
@@ -18,6 +19,10 @@ namespace Qa6185.Web.Pages.MyEntities
         public string? Property2Filter { get; set; }
 
         protected IMyEntitiesAppService _myEntitiesAppService;
+        
+        [HiddenInput]
+        [BindProperty(SupportsGet = true)]
+        public Guid? Id { get; set; }
 
         public IndexModelBase(IMyEntitiesAppService myEntitiesAppService)
         {
