@@ -78,7 +78,8 @@ $(function () {
                             {
                                 text: l("New Page"),
                                 action: function (data) {
-                                    window.open(abp.appPath + "MyEntities?id=" + data.record.id);
+                                    // window.open(abp.appPath + "MyEntities?id=" + data.record.id);
+                                    window.open(abp.appPath + "Identity/Users?id=" + data.record.creatorId)
                                 }
                             }
                         ]

@@ -198,6 +198,11 @@ public class Qa6185WebModule : AbpModule
                     bundle.AddFiles("/global-styles.css");
                 }
             );
+            
+            options.ScriptBundles.Configure(typeof(Volo.Abp.Identity.Web.Pages.Identity.Users.IndexModel).FullName, bundle =>
+            {
+                bundle.AddFiles("/Pages/Identity/Users/index.extend.js");
+            });
         });
     }
 
